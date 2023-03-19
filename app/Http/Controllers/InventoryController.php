@@ -1,10 +1,23 @@
 <?php
 
+declare(strict_types=1);
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\InventoryService;
 
 class InventoryController extends Controller
 {
-    //
+    private $InventoryService;
+
+    public function __construct(InventoryService $InventoryService) 
+    {
+        $this->InventoryService = $InventoryService;
+    }
+
+    public function index() 
+    {
+        return response()->json([
+            'data' => $this->InventoryService->getAllInventories()
+        ]);
+    }
 }

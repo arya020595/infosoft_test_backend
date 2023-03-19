@@ -6,6 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,15 @@ Route::resource('posts', PostController::class)->only([
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'authenticate']);
 Route::get('open', [DataController::class, 'open']);
+
+Route::resource('inventories', InventoryController::class)->only([
+    'index'
+]);
+
+Route::resource('orders', OrderController::class)->only([
+    'index', 'show'
+]);
+Route::get('orders/vehicle/{id}', [OrderController::class, 'getOrderByVehicleId']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', [UserController::class, 'getAuthenticatedUser']);
