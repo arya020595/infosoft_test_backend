@@ -36,7 +36,15 @@ class OrdersTableSeeder extends Seeder
                 $OrderItems->total_price = ($vehicle->price * $quantity);
                 $order->orderItems()->associate($OrderItems);
             }
-            
+
+            $order->save();
+
+            $sum = array_reduce($order->orderItems->toArray(), function($carry, $item) {
+                return $carry + $item['total_price'];
+            });
+
+            $order->total_amount = $sum;
+
             $order->save();
         }
     }
