@@ -15,8 +15,8 @@ class Vehicle extends Model
         return $this->morphTo();
     }
 
-    public function storages()
+    public function inventories()
     {
-        return $this->hasMany(Storage::class);
+        return $this->hasMany(Inventory::class);
     }
 }
