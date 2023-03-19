@@ -20,4 +20,11 @@ class InventoryController extends Controller
             'data' => $this->InventoryService->getAllInventories()
         ]);
     }
+
+    public function show($inventoryId)
+    {
+        return response()->json([
+            'data' => $this->InventoryService->getInventoryById($inventoryId)
+        ]);
+    }
 }

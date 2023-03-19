@@ -11,7 +11,7 @@ class Order extends Model
 
     public function orderItems()
     {
-        return $this->embedsMany(OrderItems::class);
+        return $this->hasMany(OrderItems::class);
     }
 
     public function customer()

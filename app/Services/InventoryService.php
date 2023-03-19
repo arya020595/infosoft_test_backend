@@ -17,4 +17,9 @@ class InventoryService
     {
         return $this->orderRepository->getAllInventories();
     }
+
+    public function getInventoryById($inventoryId) 
+    {
+        return $this->orderRepository->getInventoryById($inventoryId);
+    }
 }

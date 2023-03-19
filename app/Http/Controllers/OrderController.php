@@ -27,11 +27,4 @@ class OrderController extends Controller
             'data' => $this->orderService->getOrderById($orderId)
         ]);
     }
-
-    public function getOrderByVehicleId(string $vehicleId)
-    {
-        return response()->json([
-            'data' => $this->orderService->getOrderByVehicleId($vehicleId)
-        ]);
-    }
 }

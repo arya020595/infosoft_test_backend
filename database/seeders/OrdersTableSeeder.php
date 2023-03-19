@@ -25,6 +25,7 @@ class OrdersTableSeeder extends Seeder
             $order = new Order;
             $order->order_status = 'paid';
             $order->customer()->associate($customer);
+            $order->save();
             
             foreach ($vehicles as $vehicle) {
                 $quantity = rand(1,3);
@@ -34,10 +35,10 @@ class OrdersTableSeeder extends Seeder
                 $OrderItems->quantity = $quantity;
                 $OrderItems->unit_price = $vehicle->price;
                 $OrderItems->total_price = ($vehicle->price * $quantity);
-                $order->orderItems()->associate($OrderItems);
+                $OrderItems->save();
+                $order->orderItems()->save($OrderItems);
             }
 
-            $order->save();
 
             $sum = array_reduce($order->orderItems->toArray(), function($carry, $item) {
                 return $carry + $item['total_price'];

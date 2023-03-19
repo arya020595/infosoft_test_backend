@@ -16,9 +16,4 @@ class OrderRepository implements OrderRepositoryInterface
     {
         return Order::findOrFail($orderId);
     }
-
-    public function getOrderByVehicleId($vehicleId) 
-    {
-        return Order::where('orderItems.vehicle_id', $vehicleId)->get();
-    }
 }

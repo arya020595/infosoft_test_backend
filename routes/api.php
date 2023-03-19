@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,13 +30,17 @@ Route::post('login', [UserController::class, 'authenticate']);
 Route::get('open', [DataController::class, 'open']);
 
 Route::resource('inventories', InventoryController::class)->only([
-    'index'
+    'index', 'show'
 ]);
 
 Route::resource('orders', OrderController::class)->only([
     'index', 'show'
 ]);
-Route::get('orders/vehicle/{id}', [OrderController::class, 'getOrderByVehicleId']);
+
+Route::resource('orderItems', OrderItemController::class)->only([
+    'index', 'show'
+]);
+Route::get('orderItems/vehicle/{id}', [OrderItemController::class, 'getOrderItemByVehicleId']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('user', [UserController::class, 'getAuthenticatedUser']);

@@ -22,9 +22,4 @@ class OrderService
     {
         return $this->orderRepository->getOrderById($orderId);
     }
-
-    public function getOrderByVehicleId($vehicleId) 
-    {
-        return $this->orderRepository->getOrderByVehicleId($vehicleId);
-    }
 }
