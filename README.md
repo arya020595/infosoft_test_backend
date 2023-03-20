@@ -28,3 +28,14 @@ http://127.0.0.1:8000/api/orderItems/vehicle/{{vehicleId}}
 
 Link Collection Endpoint
 https://api.postman.com/collections/7412551-8685bfda-85da-4901-a822-ed5672d3ed04?access_key=PMAT-01GVXHP60Y8BTT383RG1Q4997Q
+
+
+#### RUN TESTS 
+./vendor/bin/phpunit
+
+##### TEST CASE
+1. Test Required Fields For Registration
+2. Test Repeat Password
+3. Test Successful Registration
+4. Test Must Enter Email And Password (when login)
+5. Test Successful Login
