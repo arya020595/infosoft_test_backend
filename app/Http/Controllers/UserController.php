@@ -32,7 +32,11 @@ class UserController extends Controller {
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json(
+                [
+                    "message" => "The given data was invalid.",
+                    "errors" => $validator->errors()
+                ], 422);
         }
 
         $user = User::create([
