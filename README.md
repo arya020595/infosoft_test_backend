@@ -9,7 +9,7 @@ php artisan db:seed
 php artisan serve
 
 #### TESTING SERVER BACKEND
-The endpoint require Authorization Bearer Token. So You should register first, then login to get the token. 
+The endpoint require Authorization Bearer Token. Please register first, then login to get the token. 
 You can also login using data user on database (password value = "secret")
 
 ##### STEP TO GET TOKEN
