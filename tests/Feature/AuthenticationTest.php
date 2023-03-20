@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticationTest extends TestCase
 {
@@ -64,5 +66,31 @@ class AuthenticationTest extends TestCase
                 ],
                 "token",
             ]);
+    }
+
+    public function testMustEnterEmailAndPassword()
+    {
+        $this->json('POST', 'api/login')
+            ->assertStatus(400)
+            ->assertJson(['error' => 'invalid_credentials']);
+    }
+
+    public function testSuccessfulLogin()
+    {
+        
+        $user = new User;
+        $user->email = 'sample@test.com';
+        $user->password = Hash::make('secret');
+        $user->save();
+
+        $loginData = ['email' => 'sample@test.com', 'password' => 'secret'];
+
+        $this->json('POST', 'api/login', $loginData, ['Accept' => 'application/json'])
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                "token"
+            ]);
+
+        $this->assertAuthenticated();
     }
 }
